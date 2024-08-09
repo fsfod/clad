@@ -14,7 +14,7 @@ set(link_libs cladDifferentiator)
 
 if (NOT CLAD_BUILD_STATIC_ONLY)
   # Get rid of libLLVM-X.so which is appended to the list of static libraries.
-  if (LLVM_LINK_LLVM_DYLIB)
+  if (LLVM_LINK_LLVM_DYLIB AND NOT MSVC)
     set(new_libs ${link_libs})
     set(libs ${new_libs})
     while(NOT "${new_libs}" STREQUAL "")
@@ -48,10 +48,11 @@ if (NOT CLAD_BUILD_STATIC_ONLY)
   endif(LLVM_LINK_LLVM_DYLIB)
 
   add_llvm_loadable_module(
-    clad ${CLAD_PLUGIN_SRC} DISABLE_LLVM_LINK_LLVM_DYLIB PLUGIN_TOOL clang
+    clad ${CLAD_PLUGIN_SRC} PLUGIN_TOOL clang
     )
 
   target_link_libraries(clad PRIVATE ${link_libs})
+  target_link_libraries(clad PRIVATE clang-cpp)
 
   # Add Enzyme as a backend.
   if (CLAD_ENABLE_ENZYME_BACKEND)
