@@ -27,7 +27,7 @@ function(ENABLE_CLAD_FOR_TARGET executable)
   endif()
 
   # Add the clad plugin
-  target_compile_options(${executable} PUBLIC -fplugin=$<TARGET_FILE:clad>)
+  target_compile_options(${executable} PUBLIC /clang:-fplugin=$<TARGET_FILE:clad>)
 
   # Debugging. Emitting the derivatives' source code.
   #target_compile_options(${executable} PUBLIC "SHELL:-Xclang -plugin-arg-clad"
