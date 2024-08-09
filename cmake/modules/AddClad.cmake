@@ -40,7 +40,9 @@ function(ENABLE_CLAD_FOR_TARGET executable)
   #target_compile_options(${executable} PUBLIC "SHELL:-Xclang -Rpass-missed=.*inline.*")
 
   # Clad requires us to link against these libraries.
-  target_link_libraries(${executable} PUBLIC stdc++ pthread m)
+  if(NOT MSVC)
+   target_link_libraries(${executable} PUBLIC stdc++ pthread m)
+  endif()
 
   target_include_directories(${executable} PUBLIC ${CMAKE_CURRENT_BINARY_DIR})
   set_property(TARGET ${executable} PROPERTY RUNTIME_OUTPUT_DIRECTORY ${CMAKE_CURRENT_BINARY_DIR})
