@@ -36,6 +36,10 @@ if (LLVM_ENABLE_WERROR)
   endif()
 endif(LLVM_ENABLE_WERROR)
 
+if (MSVC AND CMAKE_CXX_COMPILER_ID MATCHES Clang)
+  set(CMAKE_CXX_FLAGS_NOCOV "${CMAKE_CXX_FLAGS_NOCOV} -Wno-covered-switch-default -Wno-suggest-override -Wno-unused-command-line-argument")
+endif()
+
 include(ExternalProject)
 ExternalProject_Add(
   googletest
