@@ -331,7 +331,11 @@ if (NOT CLAD_BUILD_STATIC_ONLY)
     set(stored_cxx_compiler ${CMAKE_CXX_COMPILER})
     set(stored_cxx_flags ${CMAKE_CXX_FLAGS})
 
-    set(CMAKE_CXX_COMPILER ${LLVM_TOOLS_BINARY_DIR}/clang)
+    if(MSVC)
+      set(CMAKE_CXX_COMPILER ${LLVM_TOOLS_BINARY_DIR}/clang-cl.exe)
+    else()
+      set(CMAKE_CXX_COMPILER ${LLVM_TOOLS_BINARY_DIR}/clang)
+    endif()
     # Filter some unsupported flags by clang.
     string(REPLACE "-fno-lifetime-dse" "" CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS}")
     string(REPLACE "-Wno-class-memaccess" "" CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS}")
