@@ -1,4 +1,4 @@
-// RUN: %cladclang %s -I%S/../../include -oTimingsReport.out -ftime-report 2>&1 | %filecheck %s
+// RUN: %cladclang %s -I%S/../../include -oTimingsReport.out /clang:-ftime-report 2>&1 | %filecheck %s
 
 #include "clad/Differentiator/Differentiator.h"
 // CHECK-NOT: {{.*error|warning|note:.*}}

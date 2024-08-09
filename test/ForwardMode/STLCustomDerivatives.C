@@ -1,4 +1,4 @@
-// RUN: %cladclang %s -std=c++14 -I%S/../../include -oSTLCustomDerivatives.out | %filecheck %s
+// RUN: %cladclang %s /clang:-std=c++14 -I%S/../../include -oSTLCustomDerivatives.out | %filecheck %s
 // RUN: ./STLCustomDerivatives.out | %filecheck_exec %s
 
 // CHECK-NOT: {{.*error|warning|note:.*}}

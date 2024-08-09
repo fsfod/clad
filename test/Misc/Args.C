@@ -12,11 +12,11 @@
 // CHECK_HELP-NEXT: -fprint-num-diff-errors
 // CHECK_HELP-NEXT: -help
 
-// RUN: clang -fsyntax-only -fplugin=%cladlib -Xclang -plugin-arg-clad\
+// RUN: clang -fsyntax-only /clang:-fplugin=%cladlib -Xclang -plugin-arg-clad\
 // RUN: -Xclang -invalid %s 2>&1 | FileCheck --check-prefix=CHECK_INVALID %s
 // CHECK_INVALID: -invalid
 
-// RUN: clang -fsyntax-only -fplugin=%cladlib -Xclang -plugin-arg-clad \
+// RUN: clang -fsyntax-only /clang:-fplugin=%cladlib -Xclang -plugin-arg-clad \
 // RUN:  -Xclang -fcustom-estimation-model %s 2>&1 | FileCheck --check-prefix=CHECK_EST_INVALID %s
 // CHECK_EST_INVALID: No shared object was specified
 
@@ -27,6 +27,6 @@
 // RUN: -I%S/../../include 2>&1 | FileCheck --check-prefix=CHECK_SO_INVALID %s
 // CHECK_SO_INVALID: Failed to load '{{.*.so}}', {{.*}}. Aborting.
 
-// RUN: clang -fsyntax-only -fplugin=%cladlib -Xclang -plugin-arg-clad -Xclang -enable-tbr \
+// RUN: clang -fsyntax-only /clang:-fplugin=%cladlib -Xclang -plugin-arg-clad -Xclang -enable-tbr \
 // RUN:  -Xclang -plugin-arg-clad -Xclang -disable-tbr %s 2>&1 | FileCheck --check-prefix=CHECK_TBR %s
 // CHECK_TBR: -enable-tbr and -disable-tbr cannot be used together
