@@ -43,3 +43,5 @@ llvm_add_library(cladDifferentiator
   VisitorBase.cpp
   ${version_inc}
   )
+
+  target_compile_options(cladDifferentiator PUBLIC /Zc:dllexportInlines-)

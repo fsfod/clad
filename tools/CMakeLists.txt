@@ -52,7 +52,10 @@ if (NOT CLAD_BUILD_STATIC_ONLY)
     )
 
   target_link_libraries(clad PRIVATE ${link_libs})
-  target_link_libraries(clad PRIVATE clang-cpp)
+if(MSVC)
+  target_link_libraries(cladPlugin PUBLIC clang-cpp)
+  target_link_libraries(clad PUBLIC clang-cpp)
+endif()
 
   # Add Enzyme as a backend.
   if (CLAD_ENABLE_ENZYME_BACKEND)
